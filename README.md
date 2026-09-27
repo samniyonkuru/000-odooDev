@@ -15,10 +15,50 @@ Install:
 
 ## Setup
 
-### 1. Clone the repository
+### 1. Clone the template
+
+Clone the Odoo development template and rename it for the new project.
 
 ```bash
 git clone git@github.com:samniyonkuru/000-odooDev.git
-cd 000-odooDev
+mv 000-odooDev 001-training
+cd 001-training
+```
 
+### 2. Create a new Git repository
 
+Remove the Git history of the template and initialize a new repository for the project.
+
+```bash
+rm -rf .git
+git init
+git branch -M main
+```
+
+The project is now independent from `000-odooDev`.
+
+### 3. Start the development environment
+
+The devenv configuration is already included in the template.
+
+```bash
+devenv shell
+```
+
+There is no need to run `devenv init`.
+
+### 4. Clone Odoo
+
+#### Odoo 19
+
+```bash
+git clone --depth 1 --branch 19.0 https://github.com/odoo/odoo.git odoo
+```
+
+#### Odoo 20
+
+```bash
+git clone --depth 1 --branch 20.0 https://github.com/odoo/odoo.git odoo
+```
+
+The `odoo/` directory is ignored by Git and is therefore not included in the project repository.
