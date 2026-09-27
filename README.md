@@ -21,8 +21,8 @@ Clone the Odoo development template and rename it for the new project.
 
 ```bash
 git clone git@github.com:samniyonkuru/000-odooDev.git
-mv 000-odooDev 001-training
-cd 001-training
+mv 000-odooDev 000-template
+cd 001-template
 ```
 
 ### 2. Create a new Git repository
