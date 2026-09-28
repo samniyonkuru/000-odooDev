@@ -17,32 +17,24 @@ Install:
 
 ### 1. Clone the template
 
-Clone the Odoo development template:
+Clone the Odoo development template directly into a directory named after the
+new project.
 
 ```bash
-git clone git@github.com:samniyonkuru/000-odooDev.git
-```
-
-Choose the name of the new project:
-
-```bash
-read -p "Project name: " PROJECT_NAME
+git clone git@github.com:samniyonkuru/000-odooDev.git <project-name>
+cd <project-name>
 ```
 
 Example:
 
-```text
-Project name: 001-estate
-```
-
-Rename the template and enter the project:
-
 ```bash
-mv 000-odooDev "$PROJECT_NAME"
-cd "$PROJECT_NAME"
+git clone git@github.com:samniyonkuru/000-odooDev.git 001-estate
+cd 001-estate
 ```
 
-The resulting project directory will be:
+Git clones the `000-odooDev` template directly into the `001-estate` directory.
+
+The resulting directory is:
 
 ```text
 001-estate/
@@ -50,13 +42,15 @@ The resulting project directory will be:
 
 ### 2. Create a new Git repository
 
-Remove the Git history of the template:
+The cloned project still contains the Git history and remote of the template.
+
+Remove them:
 
 ```bash
 rm -rf .git
 ```
 
-Initialize a new Git repository:
+Initialize a new Git repository for the project:
 
 ```bash
 git init
@@ -187,13 +181,13 @@ Remove the automatically created user database:
 dropdb "$USER"
 ```
 
-After removing it, use the `postgres` database when running PostgreSQL commands:
+Check the databases again using the `postgres` database:
 
 ```bash
 psql -d postgres -l
 ```
 
-The remaining databases should be:
+For a clean environment, the PostgreSQL system databases should remain:
 
 ```text
 postgres
@@ -211,7 +205,7 @@ python odoo/odoo-bin \
   --save
 ```
 
-Odoo will start after saving the configuration.
+Odoo starts after saving the configuration.
 
 Once the configuration has been generated, stop Odoo with:
 
@@ -225,8 +219,8 @@ The generated file is:
 odoo.conf
 ```
 
-It contains the settings for the current local environment, including the
-PostgreSQL connection.
+It contains the settings for the current development environment, including
+the PostgreSQL connection.
 
 The `odoo.conf` file is local to the project and should not be committed.
 
@@ -238,7 +232,7 @@ odoo.conf
 
 ### 9. Start Odoo
 
-Start the Odoo server:
+Start Odoo using the generated configuration:
 
 ```bash
 python odoo/odoo-bin -c ./odoo.conf
@@ -277,11 +271,19 @@ admin
 
 The database is now initialized directly by Odoo.
 
+---
+
 ## Daily workflow
 
 The complete setup only needs to be performed once.
 
 Enter the project:
+
+```bash
+cd ~/odoo/<project-name>
+```
+
+Example:
 
 ```bash
 cd ~/odoo/001-estate
@@ -299,7 +301,7 @@ Start PostgreSQL:
 devenv processes up -d
 ```
 
-Check PostgreSQL if needed:
+Optionally check PostgreSQL:
 
 ```bash
 pg_isready
@@ -331,10 +333,12 @@ Then stop the devenv services:
 devenv processes down
 ```
 
+---
+
 ## Project structure
 
 ```text
-001-estate/
+<project-name>/
 ├── custom-addons/
 │   └── estate/
 │       ├── __init__.py
@@ -351,6 +355,8 @@ devenv processes down
 ├── .gitignore
 └── README.md
 ```
+
+---
 
 ## Git
 
@@ -388,7 +394,7 @@ git add .
 git commit -m "Initial Odoo development environment"
 ```
 
-Create a GitHub repository for the project and add it as the remote.
+Create a GitHub repository for the new project and add it as the remote.
 
 Example:
 
@@ -396,6 +402,8 @@ Example:
 git remote add origin git@github.com:samniyonkuru/001-estate.git
 git push -u origin main
 ```
+
+---
 
 ## Git workflow
 
@@ -408,14 +416,16 @@ git commit -m "Description of changes"
 git push
 ```
 
+---
+
 ## Architecture
 
 ```text
 000-odooDev
       │
-      │ clone
+      │ git clone ... <project-name>
       ▼
-New project
+<project-name>
       │
       ├── devenv
       │     ├── Python
@@ -444,22 +454,21 @@ Each new Odoo project gets its own:
 The Odoo source code itself is cloned separately and is not committed to the
 project repository.
 
+---
+
 ## New project workflow
 
 ```text
-Clone 000-odooDev
+git clone 000-odooDev <project-name>
         │
         ▼
-Enter project name
+Remove template Git history
         │
         ▼
-Rename template
+Initialize new Git repository
         │
         ▼
-Create new Git repository
-        │
-        ▼
-Clone Odoo
+Clone Odoo source
         │
         ▼
 devenv shell
