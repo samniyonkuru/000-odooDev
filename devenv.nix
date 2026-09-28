@@ -14,7 +14,15 @@
   packages = [ pkgs.git ];
 
   # https://devenv.sh/languages/
-  languages.python.enable = true;
+    
+  languages.python = {
+    enable = true;
+
+    venv = {
+      enable = true;
+      requirements = ./odoo/requirements.txt;
+    };
+  };
 
   # https://devenv.sh/processes/
   # processes.dev.exec = "${lib.getExe pkgs.watchexec} -n -- ls -la";

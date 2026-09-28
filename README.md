@@ -62,3 +62,16 @@ git clone --depth 1 --branch 20.0 https://github.com/odoo/odoo.git odoo
 ```
 
 The `odoo/` directory is ignored by Git and is therefore not included in the project repository.
+
+### 5. Configuration of the database
+
+```bash
+python odoo/odoo-bin \
+  --config=./odoo.conf \
+  --save
+```
+### 6. Launching odoo
+
+```bash
+python odoo/odoo-bin -c ./odoo.conf
+```
